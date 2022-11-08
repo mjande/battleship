@@ -1,17 +1,16 @@
 export default function Gameboard() {
-  const grid = {
-    '0': {},
-    '1': {},
-    '2': {},
-    '3': {},
-    '4': {},
-    '5': {},
-    '6': {},
-    '7': {},
-    '8': {},
-    '9': {},
-    '10': {}
-  };
+  const grid = [
+    Array(10),
+    Array(10),
+    Array(10), 
+    Array(10),
+    Array(10),
+    Array(10), 
+    Array(10), 
+    Array(10), 
+    Array(10), 
+    Array(10)
+  ];
 
   const ships = [];
 
@@ -27,6 +26,7 @@ export default function Gameboard() {
 
     if (typeof cell === 'object') {
       cell.hit()
+      grid[x][y] = 'hit';
       return true;
     }; 
 
@@ -36,7 +36,8 @@ export default function Gameboard() {
 
   function hasAllShipsSunk() {
     return ships.every((ship) => ship.hasSunk());
-  }
+  };
 
   return { grid, setShip, receiveAttack, hasAllShipsSunk }
 }
+
