@@ -1,5 +1,10 @@
 import Gameboard from '../gameboard';
 
+jest.mock('../ship', (() => jest.fn((length) => {
+  const ship = { length };
+  return ship;
+})));
+
 describe('setShip()', ()=> {
   it('sets ship at given coordinates', () => {
     const board = Gameboard();
@@ -16,29 +21,40 @@ describe('setShip()', ()=> {
   })
 });
 
-describe('receiveAttack()', () => {
-  const board = Gameboard();
-  const ship = { hit: jest.fn() }
-  board.setShip(ship, [
-    { x: '0', y: '0' },
-    { x: '0', y: '1' },
-    { x: '0', y: '2' }
-  ]);
+describe('receiveAttack()', () => {  
 
   it('returns true for successful hit', () => {
+    const board = Gameboard();
+    const ship = { hit: jest.fn() }
+    board.setShip(ship, [
+      { x: '0', y: '0' },
+      { x: '0', y: '1' },
+      { x: '0', y: '2' }
+    ]);
+
     expect(board.receiveAttack('0', '0')).toBeTruthy();
   });
 
   it('sends call to hit ship for successful attack', () => {
+    const board = Gameboard();
+    const ship = { hit: jest.fn() }
+    board.setShip(ship, [
+      { x: '0', y: '0' },
+      { x: '0', y: '1' },
+      { x: '0', y: '2' }
+    ]);
+
     board.receiveAttack('0', '1');
     expect(ship.hit).toHaveBeenCalled();
   });
 
   it('returns false for a missed attack', () => {
+    const board = Gameboard();
     expect(board.receiveAttack('1', '1')).toBeFalsy();
   });
 
   it('sets cell to miss for missed attack', () => {
+    const board = Gameboard();
     board.receiveAttack('2', '2');
     expect(board.grid['2']['2']).toBe('miss');
   });
@@ -74,3 +90,15 @@ describe('hasAllShipsSunk()', () => {
     expect(board.hasAllShipsSunk()).toBeFalsy();
   });
 });
+
+describe('autofill()', () => {
+  it('sets ships randomly so that they do not overlap', () => {
+    const board = Gameboard();
+    board.autofill();
+    
+    const filledCellCount = 
+    board.grid.flat().filter(cell => typeof cell === 'object').length
+      
+    expect(filledCellCount).toBe(17);
+  })
+})

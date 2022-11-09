@@ -5,21 +5,23 @@ export default function getOpenCoordinates (grid, shipLength) {
     let { x, y } = coordinates;
     openCoordinates = [];
     
+    let i = 0;
     // For each space need for the length of the given ship
-    for (let i = 0; i < shipLength; i += 1) {
+    while (i < shipLength) {      
       // Move one space in the given direction
       x += direction.x;
       y += direction.y;
 
       // If that space is not open, end the loop and exit the function
-      if (x < 0 || y < 0 || x > 4 || y > 4 || 
-          !grid[x][y] === undefined) {
+      if (x < 0 || y < 0 || x > grid.length - 1 || 
+          y > grid.length - 1 || grid[x][y] !== undefined) {
         openCoordinates = null;
         break;
       };
   
     // While each space is open, add it to openCoordinates
     openCoordinates.push({ x, y });
+    i += 1;
     };
 
     // If all spaces in a given direction are open, for loop will end and 
@@ -56,8 +58,8 @@ export default function getOpenCoordinates (grid, shipLength) {
   while (openCoordinates === undefined) {    
     const triedCoordinates = [];
     // Generate a random starting coordinate
-    const x = Math.floor(Math.random() * (grid.length));
-    const y = Math.floor(Math.random() * (grid.length));
+    const x = Math.floor(Math.random() * (grid.length - 1));
+    const y = Math.floor(Math.random() * (grid.length - 1));
 
     // If that coordinate is open, check in each direction
     if (grid[x][y] === undefined && !triedCoordinates.includes({ x, y})) {

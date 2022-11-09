@@ -1,16 +1,8 @@
+import getOpenCoordinates from './get-open-coordinates';
+import Ship from './ship';
+
 export default function Gameboard() {
-  const grid = [
-    Array(10),
-    Array(10),
-    Array(10), 
-    Array(10),
-    Array(10),
-    Array(10), 
-    Array(10), 
-    Array(10), 
-    Array(10), 
-    Array(10)
-  ];
+  const grid = [...Array(10)].map(() => Array(10));
 
   const ships = [];
 
@@ -38,6 +30,30 @@ export default function Gameboard() {
     return ships.every((ship) => ship.hasSunk());
   };
 
-  return { grid, setShip, receiveAttack, hasAllShipsSunk }
+  function autofill() {
+    const carrier = Ship(5);
+    let openCoordinates = getOpenCoordinates(grid, 5);
+    setShip(carrier, openCoordinates);
+
+    const battleship = Ship(4);
+    openCoordinates = getOpenCoordinates(grid, 4);
+    setShip(battleship, openCoordinates);
+
+    const destroyer = Ship(3);
+    openCoordinates = getOpenCoordinates(grid, 3);
+    setShip(destroyer, openCoordinates);
+
+    const submarine = Ship(3);
+    openCoordinates = getOpenCoordinates(grid, 3);
+    setShip(submarine, openCoordinates);
+
+    const patrolBoat = Ship(2);
+    openCoordinates = getOpenCoordinates(grid, 2);
+    setShip(patrolBoat, openCoordinates);
+
+    return ships;
+  }
+
+  return { grid, setShip, receiveAttack, hasAllShipsSunk, autofill }
 }
 
