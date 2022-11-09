@@ -31,10 +31,19 @@ body {
 }
 
 .ship-box {
+  box-sizing: border-box;
   border-collapse: collapse;
   height: 1.5rem;
   width: 1.5rem;
-  border: 0.5px solid #00f;
+  border: 0.5px solid rgb(0, 0, 225);
+}
+
+.ship {
+  border-collapse: collapse;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid rgb(0, 0, 225);
+  background: rgba(0, 0, 255, 0.05);
 }
 
 .grid-label {
