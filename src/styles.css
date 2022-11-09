@@ -1,0 +1,42 @@
+html {
+  color: #444444;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grids {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+  margin: 0 3rem;
+}
+
+.row {
+  display: flex;
+}
+
+.ship-box {
+  border-collapse: collapse;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 0.5px solid #00f;
+}
+
+.grid-label {
+  text-align: center;
+}

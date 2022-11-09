@@ -1,34 +1,34 @@
-import getOpenCoordinates from './get-open-coordinates';
-import Ship from './ship';
+import getOpenCoordinates from "./get-open-coordinates";
+import Ship from "./ship";
 
 export default function Gameboard() {
   const grid = [...Array(10)].map(() => Array(10));
 
   const ships = [];
 
-  function setShip(ship, coordinates) {    
+  function setShip(ship, coordinates) {
     coordinates.forEach((coordinate) => {
       grid[coordinate.x][coordinate.y] = ship;
       ships.push(ship);
     });
-  };
+  }
 
   function receiveAttack(x, y) {
     const cell = grid[x][y];
 
-    if (typeof cell === 'object') {
-      cell.hit()
-      grid[x][y] = 'hit';
+    if (typeof cell === "object") {
+      cell.hit();
+      grid[x][y] = "hit";
       return true;
-    }; 
+    }
 
-    grid[x][y] = 'miss';
+    grid[x][y] = "miss";
     return false;
-  };
+  }
 
   function hasAllShipsSunk() {
     return ships.every((ship) => ship.hasSunk());
-  };
+  }
 
   function autofill() {
     const carrier = Ship(5);
@@ -54,6 +54,5 @@ export default function Gameboard() {
     return ships;
   }
 
-  return { grid, setShip, receiveAttack, hasAllShipsSunk, autofill }
+  return { grid, setShip, receiveAttack, hasAllShipsSunk, autofill };
 }
-
