@@ -62,6 +62,14 @@ function removeListeners(callback) {
   });
 }
 
+function reset() {
+  const allCells = document.querySelectorAll(".ship-box");
+  allCells.forEach((cell) => {
+    const cellElement = cell;
+    cellElement.className = "ship-box";
+  });
+}
+
 export {
   renderEmptyGrids,
   renderHumanBoard,
@@ -69,4 +77,5 @@ export {
   attachListeners,
   updateCell,
   removeListeners,
+  reset,
 };
