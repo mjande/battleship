@@ -27,7 +27,7 @@ export default function Gameboard() {
   }
 
   function hasAllShipsSunk() {
-    return ships.every((ship) => ship.hasSunk());
+    return ships.every((ship) => ship.isSunk());
   }
 
   function autofill() {

@@ -46,6 +46,21 @@ body {
   background: rgba(0, 0, 255, 0.05);
 }
 
+.miss {
+  border-collapse: collapse;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: grey;
+}
+
+.hit {
+  border-collapse: collapse;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid red;
+  background: rgba(255, 0, 0, 0.5);
+}
+
 .grid-label {
   text-align: center;
 }
